@@ -3,6 +3,8 @@ package mmarquee.automation.explorer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -82,6 +84,22 @@ public class Main extends Application {
         Scene scene = new Scene(pane, 600, 400);
 
         Button btnRefresh = new Button("Refresh");
+
+        btnRefresh.setOnAction(new EventHandler<ActionEvent>() {
+           // @Override
+            public void handle(ActionEvent e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Message Here...");
+                alert.setHeaderText("Look, an Information Dialog");
+                alert.setContentText("I have a great message for you!");
+                alert.showAndWait().ifPresent(rs -> {
+                    if (rs == ButtonType.OK) {
+                        System.out.println("Pressed OK.");
+                    }
+                });
+            }
+        });
+
         CheckBox chkAutoRefresh = new CheckBox("Auto Refresh");
 
         ToolBar toolBar1 = new ToolBar();
