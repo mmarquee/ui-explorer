@@ -3,10 +3,11 @@ package mmarquee.automation.explorer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -67,26 +68,44 @@ public class Main extends Application {
         };
     }
 
+    private UIAutomation automation = null;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Scene scene = new Scene(new Group(), 300, 300);
-        VBox vbox = new VBox();
-
-        // Shove it all in here for now
-        UIAutomation automation = UIAutomation.getInstance();
+        // Get the top most level
+        automation = UIAutomation.getInstance();
 
         AutomationTreeWalker walker = automation.getControlViewWalker();
 
-        //AutomationElement root = automation.getRootElement();
+        // Create UI
+        BorderPane pane = new BorderPane();
+        Scene scene = new Scene(pane, 600, 400);
 
+        Button btnRefresh = new Button("Refresh");
+        CheckBox chkAutoRefresh = new CheckBox("Auto Refresh");
+
+        ToolBar toolBar1 = new ToolBar();
+        toolBar1.getItems().addAll(
+                new Separator(),
+                btnRefresh,
+                new Separator(),
+                chkAutoRefresh,
+                new Separator()
+        );
+
+        VBox vbox = new VBox();
 
         TreeItem<File> root = createNode(new File("c:/"));
         TreeView treeView = new TreeView<File>(root);
 
         vbox.getChildren().add(treeView);
-        ((Group) scene.getRoot()).getChildren().add(vbox);
+        ((BorderPane) scene.getRoot()).getChildren().add(vbox);
+
+        pane.setTop(toolBar1);
+        pane.setLeft(treeView);
 
         primaryStage.setScene(scene);
+        primaryStage.setTitle("UI Automation Explorer");
         primaryStage.show();
     }
 
