@@ -18,6 +18,77 @@ import mmarquee.automation.UIAutomation;
 
 import java.io.File;
 
+/*
+List<Employee> employees = Arrays.<Employee>asList(
+            new Employee("a1", "A"),
+            new Employee("a2", "A"),
+            new Employee("e1", "E"));
+    private final Node rootIcon =  new ImageView(new Image(getClass().getResourceAsStream("root.png")));
+    TreeItem<String> rootNode = new TreeItem<String>("Root",rootIcon);
+
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) {
+        rootNode.setExpanded(true);
+        for (Employee employee : employees) {
+            TreeItem<String> empLeaf = new TreeItem<String>(employee.getName());
+            boolean found = false;
+            for (TreeItem<String> depNode : rootNode.getChildren()) {
+                if (depNode.getValue().contentEquals(employee.getDepartment())){
+                    depNode.getChildren().add(empLeaf);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                TreeItem depNode = new TreeItem(employee.getDepartment());
+                rootNode.getChildren().add(depNode);
+                depNode.getChildren().add(empLeaf);
+            }
+        }
+        stage.setTitle("Tree View Sample");
+        VBox box = new VBox();
+        final Scene scene = new Scene(box, 400, 300);
+        scene.setFill(Color.LIGHTGRAY);
+
+        TreeView<String> treeView = new TreeView<String>(rootNode);
+        treeView.setShowRoot(true);
+        treeView.setEditable(true);
+        box.getChildren().add(treeView);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public static class Employee {
+
+        private final SimpleStringProperty name;
+        private final SimpleStringProperty department;
+
+        private Employee(String name, String department) {
+            this.name = new SimpleStringProperty(name);
+            this.department = new SimpleStringProperty(department);
+        }
+
+        public String getName() {
+            return name.get();
+        }
+
+        public void setName(String fName) {
+            name.set(fName);
+        }
+
+        public String getDepartment() {
+            return department.get();
+        }
+
+        public void setDepartment(String fName) {
+            department.set(fName);
+        }
+    }
+ */
+
 public class Main extends Application {
 
     // Originally from http://www.java2s.com/Tutorials/Java/JavaFX/0660__JavaFX_Tree_View.htm
@@ -86,7 +157,7 @@ public class Main extends Application {
         Button btnRefresh = new Button("Refresh");
 
         btnRefresh.setOnAction(new EventHandler<ActionEvent>() {
-           // @Override
+            @Override
             public void handle(ActionEvent e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Message Here...");
